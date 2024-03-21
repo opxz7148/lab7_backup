@@ -17,6 +17,8 @@
 """
 
 import re   # regular express module has a better "split"
+from functools import reduce
+
 
 def longest_word(text: str) -> str:
     """Return the longest word in an input text (a string).
@@ -24,18 +26,18 @@ def longest_word(text: str) -> str:
     separated by whitespace or punctuation (comma, period, etc).
     """
     # use a tuple of (length, word) to record a word and its length
-    maxword = (0, "")
+
     words = re.split("[\\s,\.\?]+", text)
-    for word in words:
-        if len(word) > maxword[0]:
-            maxword = (len(word), word)
+    maxword = reduce(max, map(lambda word: (len(word), word), words))
     return maxword[1]
+
 
 def test_longest_word():
     assert "Programming" == longest_word("Programming map filter reduce is easy")
     text = "The Meteorology Department predicts temperatures up to 45C this year."
     assert "temperatures" == longest_word(text)
     assert "climate" == longest_word("Is it due to El Nino or climate change?")
+
 
 if __name__ == '__main__':
     test_longest_word()

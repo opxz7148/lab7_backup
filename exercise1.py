@@ -1,6 +1,7 @@
 """Your code for Exercise 1 of Lab 7."""
 from typing import Callable
 import random
+from itertools import count
 
 
 def randgen(a, b) -> Callable:
@@ -43,7 +44,7 @@ def test_sum_fun2():
     """Use a built-in function from itertools module instead of
        writing your own test_fun.
     """
-    counter = None # TODO
+    counter = count(1,1).__next__
     # test sum of multiple calls
     roll = sum_fun(4, counter)
     assert roll() == 1+2+3+4
@@ -65,4 +66,4 @@ def compose(f, g):
        >>> h(1)
        4
      """
-    return 0
+    return lambda x: f(g(x))

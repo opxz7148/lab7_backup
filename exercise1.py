@@ -1,11 +1,13 @@
 """Your code for Exercise 1 of Lab 7."""
 from typing import Callable
+import random
+
 
 def randgen(a, b) -> Callable:
     """Returns a new function that takes no parameters,
        and returns random integers between a and b, inclusive.
     """
-    return 0
+    return lambda: random.randint(a,b)
 
 
 def sum_fun(num_calls: int, fun) -> Callable:
@@ -16,7 +18,7 @@ def sum_fun(num_calls: int, fun) -> Callable:
        :param fun: a function that takes no arguments and returns a number
        :returns: a new function that returns sum of calls to fun
     """
-    return lambda : 0
+    return lambda: sum([fun() for x in range(num_calls)])
 
 
 def test_sum_fun():
@@ -63,4 +65,4 @@ def compose(f, g):
        >>> h(1)
        4
      """
-     return 0
+    return 0

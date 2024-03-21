@@ -18,14 +18,13 @@ def sum_fun(num_calls: int, fun) -> Callable:
        :param fun: a function that takes no arguments and returns a number
        :returns: a new function that returns sum of calls to fun
     """
-    return lambda: sum([fun() for x in range(num_calls)])
+    return lambda: sum(fun() for x in range(num_calls))
 
 
 def test_sum_fun():
     """A test of the sum_fun function.  Run this using pytest."""
-    # TODO replace this code with a very long sequence of ints
-    values = [1, 2, 3, 4]
-    test_fun = None # function to return next value from values
+    values = [x for x in range(1, 101)]
+    test_fun = iter(values).__next__  # function to return next value from values
     roll = sum_fun(0, test_fun)
     # should always be zero
     assert roll() == 0
@@ -34,10 +33,11 @@ def test_sum_fun():
     assert 1 == test_fun()
     # test sum of multiple calls
     roll = sum_fun(3, test_fun)
-    assert roll() == 2+3+4
-    assert roll() == 5+6+7
+    assert roll() == 2 + 3 + 4
+    assert roll() == 5 + 6 + 7
     roll = sum_fun(5, test_fun)
-    assert roll() == 8+9+10+11+12
+    assert roll() == 8 + 9 + 10 + 11 + 12
+
 
 def test_sum_fun2():
     """Use a built-in function from itertools module instead of

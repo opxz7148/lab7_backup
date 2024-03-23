@@ -67,3 +67,4 @@ def compose(f, g):
        4
      """
     return lambda x: f(g(x))
+
